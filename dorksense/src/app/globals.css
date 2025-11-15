@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #111111;
+  --shell: #fafafa;
+  --acid: #b4ff39;
+  --magenta: #ff00b8;
+  --circuit: #38f9ff;
+  --slate: #1f1f1f;
+  --paper: #f7f1e3;
+}
+
+@theme inline {
+  --color-background: transparent;
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  font-family: var(--font-geist-sans), system-ui;
+  background: radial-gradient(circle at 10% 20%, var(--acid) 0, transparent 35%),
+    radial-gradient(circle at 80% 0%, var(--magenta) 0, transparent 45%),
+    radial-gradient(circle at 50% 95%, var(--circuit) 0, transparent 40%),
+    repeating-linear-gradient(135deg, #ffffff 0 14px, #f5f5f5 14px 28px);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--magenta);
+  color: #111;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+  z-index: 1;
+}
+
+.grid-mask {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.8), transparent 70%);
+  z-index: 1;
+}
+
+.wobble {
+  animation: wobble 6s ease-in-out infinite;
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-1deg) translateY(0px) scale(1);
+  }
+  20% {
+    transform: rotate(1deg) translateY(-6px) scale(1.01);
+  }
+  40% {
+    transform: rotate(-1.5deg) translateY(6px) scale(0.99);
+  }
+  60% {
+    transform: rotate(1deg) translateY(-4px) scale(1.02);
+  }
+  80% {
+    transform: rotate(-0.5deg) translateY(4px) scale(0.995);
+  }
+}
+
+.snap-mandala {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-panel {
+  scroll-snap-align: start;
+}
+
+.chrome {
+  filter: drop-shadow(0 10px 0 #000) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.25));
+}
+
+.beam {
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.35), transparent 65%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.4) 15%, rgba(0, 0, 0, 0.9) 50%, transparent 90%);
+}
+
+.blend-pop {
+  mix-blend-mode: hard-light;
+}
